@@ -40,6 +40,10 @@ export const getServerSideProps = async (ctx) => {
     return { props: { user: body.user } };
 };
 
+const jobs = ['Albañil', 'Carpintero', 'Cerrajero', 'Electricista', 'Jardinero', 'Limpieza', 'Niñera', 'Pintor', 'Plomero'];
+const jobsImg = [albanil.src, carpintero.src, cerrajero.src, electricista.src, jardinero.src, limpieza.src, ninera.src, pintor.src, plomero.src];
+
+
 export default function Home({ user }) {
     return (
         <>
@@ -47,104 +51,22 @@ export default function Home({ user }) {
             <main>
                 <div className='icons'>
                     <h1>¿Qué estas buscando?</h1>
-                    <div className='row'>
-                        <Link href='/find'>
-                            <div className='icon'>
-                                <Image
-                                    id='plomero'
-                                    src={plomero}
-                                    width='50px'
-                                    height='50px'
-                                />
-                                <br />
-                                <span>PLOMERO</span>
-                            </div>
-                        </Link>
-                        <div className='icon'>
-                            <Image
-                                id='image'
-                                src={ninera}
-                                width={50}
-                                height={50}
-                            />
-                            <br />
-                            <span>NIÑERA</span>
-                        </div>
-                        <div className='icon'>
-                            <Image
-                                id='image'
-                                src={carpintero}
-                                width={50}
-                                height={50}
-                            />
-                            <br />
-                            <span>CARPINTERO</span>
-                        </div>
-                    </div>
-                    <div className='row'>
-                        <div className='icon'>
-                            <Image
-                                id='image'
-                                src={electricista}
-                                width={50}
-                                height={50}
-                            />
-                            <br />
-                            <span>ELECTRICISTA</span>
-                        </div>
-                        <div className='icon'>
-                            <Image
-                                id='image'
-                                src={jardinero}
-                                width={50}
-                                height={50}
-                            />
-                            <br />
-                            <span>JARDINERO</span>
-                        </div>
-                        <div className='icon'>
-                            <Image
-                                id='image'
-                                src={limpieza}
-                                width={50}
-                                height={50}
-                            />
-                            <br />
-                            <span>LIMPIEZA</span>
-                        </div>
-                    </div>
-                    <div className='row'>
-                        <div className='icon'>
-                            <Image
-                                id='image'
-                                src={albanil}
-                                width={50}
-                                height={50}
-                            />
-                            <br />
-                            <span>ALBAÑIL</span>
-                        </div>
-                        <div className='icon'>
-                            <Image
-                                id='image'
-                                src={cerrajero}
-                                width={50}
-                                height={50}
-                            />
-                            <br />
-                            <span>CERRAJERO</span>
-                        </div>
-                        <div className='icon'>
-                            <Image
-                                id='image'
-                                src={pintor}
-                                width={50}
-                                height={50}
-                            />
-                            <br />
-                            <span>PINTOR</span>
-                        </div>
-                    </div>
+                        {jobsImg.map((value, index) => {
+                            return (<div className='row'>
+                            <Link href={'/find/' + jobs[index]}>
+                                <div className='icon'>
+                                    <Image
+                                        id='albanil'
+                                        src={value}
+                                        width='50px'
+                                        height='50px'
+                                    />
+                                    <br />
+                                    <span>{jobs[index]}</span>
+                                </div>
+                            </Link>
+                            </div>)
+                        })}
                 </div>
             </main>
             <Footer />

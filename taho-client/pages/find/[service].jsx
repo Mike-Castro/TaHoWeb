@@ -6,6 +6,9 @@ import Image from 'next/image';
 import WorkerTile from '../../components/WorkerTile';
 import { apiServer } from '../../config/index.js';
 import { useRouter } from 'next/router';
+import Select from 'react-select'
+import Button from '@mui/material/Button';
+import Link from 'next/link';
 
 export const getServerSideProps = async (ctx) => {
     const res = await fetch(`${apiServer}/user/auth`, {
@@ -53,6 +56,16 @@ export default function Find({ user }) {
         fetchWorkers().catch(console.error);
     }, [workerService]);
 
+    const options = [
+        {value: "albanil", label: "Albañil"},
+        {value: "carpintero", label: "Carpintero"},
+        {value: "cerrajero", label: "Cerrajero"}
+    ];
+    const handleChange = (selectedOption) => {
+        this.props.history.push('/find/Cerrajero')
+        console.log("handleChange", selectedOption);
+    };
+
     return (
         <>
             <Script src='https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js' />
@@ -74,84 +87,66 @@ export default function Find({ user }) {
                 <form>
                     <div className='form-row justify-content-md-center'>
                         <div className='col-auto'>
-                            <select
-                                className='custom-select'
-                                id='filtrarPorTrabajo'
-                                onchange='searchFilter()'
-                            >
-                                <option value='' selected>
-                                    Trabajo
-                                </option>
-                                <option value='albañil'>Albañil</option>
-                                <option value='carpintero'>Carpintero</option>
-                                <option value='cerrajero'>Cerrajero</option>
-                                <option value='electricista'>
-                                    Electricista
-                                </option>
-                                <option value='jardinero'>Jardinero</option>
-                                <option value='limpieza'>Limpieza</option>
-                                <option value='niñera'>Niñera</option>
-                                <option value='pintor'>Pintor</option>
-                                <option value='plomero'>Plomero</option>
-                            </select>
-                        </div>
-                        <div className='col-auto'>
-                            <select
-                                className='custom-select'
-                                id='filtrarPorLoc'
-                                onchange='searchFilter()'
-                            >
-                                <option value='' selected>
-                                    Ubicación
-                                </option>
-                                <option value='green'>Apodaca</option>
-                                <option value='blue'>Cadereyta Jimenez</option>
-                                <option value='yellow'>El Carmen</option>
-                                <option value='yellow'>Garcia</option>
-                                <option value='yellow'>
-                                    San Pedro Garza Garcia
-                                </option>
-                                <option value='yellow'>General Escobedo</option>
-                                <option value='yellow'>Guadalupe</option>
-                                <option value='yellow'>Juarez</option>
-                                <option value='yellow'>Monterrey</option>
-                                <option value='yellow'>Salinas Victoria</option>
-                                <option value='yellow'>
-                                    San Nicolas de los Garza
-                                </option>
-                                <option value='yellow'>Santa Catarina</option>
-                                <option value='yellow'>Santiago</option>
-                            </select>
-                        </div>
-                        <div className='col-auto'>
-                            <select
-                                className='custom-select'
-                                id='filtrarPorCosto'
-                                onchange='searchFilter()'
-                            >
-                                <option value='' selected>
-                                    Costo
-                                </option>
-                                <option value='green'>$$$</option>
-                                <option value='blue'>$$</option>
-                                <option value='yellow'>$</option>
-                            </select>
-                        </div>
-                        <div className='col-auto'>
-                            <select
-                                className='custom-select'
-                                id='filtrarPorCalif'
-                                onchange='searchFilter()'
-                            >
-                                <option value='' selected>
-                                    Calificacion
-                                </option>
-                                <option value='cinco'>5</option>
-                                <option value='cuatro'>4</option>
-                                <option value='tres'>3</option>
-                                <option value='dos'>2</option>
-                                <option value='uno'>1</option>
-                            </select>
+                            <Link href='/find/all'><Button sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '20px',
+                                textTransform: 'none',
+                                margin: '10px'
+                            }}>Todos</Button></Link>
+                            <Link href='/find/Albañil'><Button sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '20px',
+                                textTransform: 'none',
+                                margin: '10px'
+                            }}>Albañil</Button></Link>
+                            <Link href='/find/Carpintero'><Button sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '20px',
+                                textTransform: 'none',
+                                margin: '10px'
+                            }}>Carpintero</Button></Link>
+                            <Link href='/find/Cerrajero'><Button sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '20px',
+                                textTransform: 'none',
+                                margin: '10px'
+                            }}>Cerrajero</Button></Link>
+                            <Link href='/find/Electricista'><Button sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '20px',
+                                textTransform: 'none',
+                                margin: '10px'
+                            }}>Electricista</Button></Link>
+                            <Link href='/find/Jardinero'><Button sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '20px',
+                                textTransform: 'none',
+                                margin: '10px'
+                            }}>Jardinero</Button></Link>
+                            <Link href='/find/Limpieza'><Button sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '20px',
+                                textTransform: 'none',
+                                margin: '10px'
+                            }}>Limpieza</Button></Link>
+                            <Link href='/find/Niñera'><Button sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '20px',
+                                textTransform: 'none',
+                                margin: '10px'
+                            }}>Niñera</Button></Link>
+                            <Link href='/find/Pintor'><Button sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '20px',
+                                textTransform: 'none',
+                                margin: '10px'
+                            }}>Pintor</Button></Link>
+                            <Link href='/find/Plomerp'><Button sx={{
+                                backgroundColor: 'white',
+                                borderRadius: '20px',
+                                textTransform: 'none',
+                                margin: '10px'
+                            }}>Plomero</Button></Link>
                         </div>
                     </div>
                 </form>

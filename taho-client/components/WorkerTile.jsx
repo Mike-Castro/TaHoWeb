@@ -92,35 +92,35 @@ const WorkerTile = ({
                 sx={{ display: 'flex', alignItems: 'center', padding: '10px' }}
             >
                 <Typography noWrap sx={{ flex: 1, marginLeft: '8px' }}>
-                    Name: {firstName} {lastName}
+                    Nombre: {firstName} {lastName}
                 </Typography>
             </Box>
             <Box
                 sx={{ display: 'flex', alignItems: 'center', padding: '10px' }}
             >
                 <Typography noWrap sx={{ flex: 1, marginLeft: '8px' }}>
-                    Services: {services}
+                    Servicios: {services}
                 </Typography>
             </Box>
             <Box
                 sx={{ display: 'flex', alignItems: 'center', padding: '10px' }}
             >
                 <Typography noWrap sx={{ flex: 1, marginLeft: '8px' }}>
-                    Phone: {phone}
+                    Teléfono: {phone}
                 </Typography>
             </Box>
             <Box
                 sx={{ display: 'flex', alignItems: 'center', padding: '10px' }}
             >
                 <Typography noWrap sx={{ flex: 1, marginLeft: '8px' }}>
-                    Certificates: {certificates}
+                    Certificados: {certificates}
                 </Typography>
             </Box>
             <Box
                 sx={{ display: 'flex', alignItems: 'center', padding: '10px' }}
             >
                 <Typography noWrap sx={{ flex: 1, marginLeft: '8px' }}>
-                    Description: {description}
+                    Descripción: {description}
                 </Typography>
             </Box>
         </Card>
