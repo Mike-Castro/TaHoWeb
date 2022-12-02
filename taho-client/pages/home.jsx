@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Footer from '../components/Footer';
 import { apiServer } from '../config/index.js';
 import Link from 'next/link';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import albanil from '../images/albanil.png';
 import carpintero from '../images/carpintero.png';
@@ -51,8 +53,11 @@ export default function Home({ user }) {
             <main>
                 <div className='icons'>
                     <h1>¿Qué estas buscando?</h1>
+                    <Row xs={2} md={4} className="g-4">{Array.from({ length: 3  }).map((_, idx) => (
+                    <Col>
                         {jobsImg.map((value, index) => {
-                            return (<div className='row'>
+                            return (
+                            <div className='row'>
                             <Link href={'/find/' + jobs[index]}>
                                 <div className='icon'>
                                     <Image
@@ -67,6 +72,9 @@ export default function Home({ user }) {
                             </Link>
                             </div>)
                         })}
+                    </Col>
+                    ))}
+                    </Row>
                 </div>
             </main>
             <Footer />

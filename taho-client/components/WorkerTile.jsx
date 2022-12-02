@@ -3,6 +3,8 @@ import Card from '@mui/material/Card';
 import Image from 'next/image';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import albanil from '../images/albanil.png';
 import carpintero from '../images/carpintero.png';
@@ -61,6 +63,8 @@ const WorkerTile = ({
     }
 
     return (
+        <Row xs={2} md={4} className="g-4">{Array.from({ length: 1  }).map((_, idx) => (
+        <Col>
         <Card
             sx={{
                 display: 'flex',
@@ -119,11 +123,14 @@ const WorkerTile = ({
             <Box
                 sx={{ display: 'flex', alignItems: 'center', padding: '10px' }}
             >
-                <Typography noWrap sx={{ flex: 1, marginLeft: '8px' }}>
+                <Typography style={{wordWrap:"break-word"}} >
                     Descripción: {description}
                 </Typography>
             </Box>
         </Card>
+        </Col>
+        ))}
+        </Row>
     );
 };
 

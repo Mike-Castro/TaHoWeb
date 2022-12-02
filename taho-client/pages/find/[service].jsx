@@ -6,7 +6,6 @@ import Image from 'next/image';
 import WorkerTile from '../../components/WorkerTile';
 import { apiServer } from '../../config/index.js';
 import { useRouter } from 'next/router';
-import Select from 'react-select'
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 
@@ -34,6 +33,8 @@ export const getServerSideProps = async (ctx) => {
     }
     return { props: { user: body.user } };
 };
+
+const jobs = ['Albañil', 'Carpintero', 'Cerrajero', 'Electricista', 'Jardinero', 'Limpieza', 'Niñera', 'Pintor', 'Plomero'];
 
 export default function Find({ user }) {
     const router = useRouter();
@@ -93,60 +94,15 @@ export default function Find({ user }) {
                                 textTransform: 'none',
                                 margin: '10px'
                             }}>Todos</Button></Link>
-                            <Link href='/find/Albañil'><Button sx={{
-                                backgroundColor: 'white',
-                                borderRadius: '20px',
-                                textTransform: 'none',
-                                margin: '10px'
-                            }}>Albañil</Button></Link>
-                            <Link href='/find/Carpintero'><Button sx={{
-                                backgroundColor: 'white',
-                                borderRadius: '20px',
-                                textTransform: 'none',
-                                margin: '10px'
-                            }}>Carpintero</Button></Link>
-                            <Link href='/find/Cerrajero'><Button sx={{
-                                backgroundColor: 'white',
-                                borderRadius: '20px',
-                                textTransform: 'none',
-                                margin: '10px'
-                            }}>Cerrajero</Button></Link>
-                            <Link href='/find/Electricista'><Button sx={{
-                                backgroundColor: 'white',
-                                borderRadius: '20px',
-                                textTransform: 'none',
-                                margin: '10px'
-                            }}>Electricista</Button></Link>
-                            <Link href='/find/Jardinero'><Button sx={{
-                                backgroundColor: 'white',
-                                borderRadius: '20px',
-                                textTransform: 'none',
-                                margin: '10px'
-                            }}>Jardinero</Button></Link>
-                            <Link href='/find/Limpieza'><Button sx={{
-                                backgroundColor: 'white',
-                                borderRadius: '20px',
-                                textTransform: 'none',
-                                margin: '10px'
-                            }}>Limpieza</Button></Link>
-                            <Link href='/find/Niñera'><Button sx={{
-                                backgroundColor: 'white',
-                                borderRadius: '20px',
-                                textTransform: 'none',
-                                margin: '10px'
-                            }}>Niñera</Button></Link>
-                            <Link href='/find/Pintor'><Button sx={{
-                                backgroundColor: 'white',
-                                borderRadius: '20px',
-                                textTransform: 'none',
-                                margin: '10px'
-                            }}>Pintor</Button></Link>
-                            <Link href='/find/Plomerp'><Button sx={{
-                                backgroundColor: 'white',
-                                borderRadius: '20px',
-                                textTransform: 'none',
-                                margin: '10px'
-                            }}>Plomero</Button></Link>
+                            {jobs.map((value, index) => {
+                                return (
+                                    <Link href={'/find/'+value}><Button sx={{
+                                        backgroundColor: 'white',
+                                        borderRadius: '20px',
+                                        textTransform: 'none',
+                                        margin: '10px'
+                                    }}>{value}</Button></Link>
+                            )})}
                         </div>
                     </div>
                 </form>
