@@ -38,7 +38,7 @@ const WorkerTile = ({
     };
 
     function getWorkerImage() {
-        switch (workerImage) {
+        switch (services) {
             case 'Albañil':
                 return albanil;
             case 'Carpintero':

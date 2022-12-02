@@ -57,16 +57,6 @@ export default function Find({ user }) {
         fetchWorkers().catch(console.error);
     }, [workerService]);
 
-    const options = [
-        {value: "albanil", label: "Albañil"},
-        {value: "carpintero", label: "Carpintero"},
-        {value: "cerrajero", label: "Cerrajero"}
-    ];
-    const handleChange = (selectedOption) => {
-        this.props.history.push('/find/Cerrajero')
-        console.log("handleChange", selectedOption);
-    };
-
     return (
         <>
             <Script src='https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js' />
