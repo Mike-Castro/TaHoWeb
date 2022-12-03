@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import Image from 'next/image';
 import Menu from '@mui/material/Menu';
@@ -8,8 +8,26 @@ import taho_logo from '../images/taho_logo.png';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { apiServer } from '../config';
+import Modal from 'react-bootstrap/Modal';
 
-export default function Header({ user }) {
+export const getServerSideProps = async (ctx) => {
+    const res = await fetch(`${apiServer}/user/auth`, {
+        credentials: 'include',
+        headers: ctx.req.headers,
+    });
+    if (res.status !== 201) {
+        return {
+            redirect: {
+                permanent: false,
+                destination: '/login',
+            },
+        };
+    }
+    const body = await res.json();
+    return { props: { user: body.user, isWorker: body.isWorker } };
+};
+
+export default function Header({ user, isWorker }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -38,8 +56,11 @@ export default function Header({ user }) {
         }
         document.cookie = 'authcookie=;expires=' + new Date().toUTCString();
     };
+    const [show, setShow] = useState(false);
+    const handleShow = () => setShow(true);
 
     return (
+        <>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
             <Link href='/home'>
                 <Button>
@@ -114,5 +135,6 @@ export default function Header({ user }) {
                 <MenuItem onClick={logout}>Cerrar sesión</MenuItem>
             </Menu>
         </Toolbar>
+        </>
     );
 }

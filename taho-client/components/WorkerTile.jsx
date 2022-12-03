@@ -63,7 +63,7 @@ const WorkerTile = ({
     }
 
     return (
-        <Row xs={2} md={4} className="g-4">{Array.from({ length: 1  }).map((_, idx) => (
+        <Row xs={2} md={2} className="g-4">{Array.from({ length: 1  }).map((_, idx) => (
         <Col>
         <Card
             sx={{
@@ -71,7 +71,7 @@ const WorkerTile = ({
                 flexDirection: 'column',
                 alignItems: 'stretch',
                 margin: '8px',
-                width: '270px',
+                width: '500px',
             }}
         >
             <Box

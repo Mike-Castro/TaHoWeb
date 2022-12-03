@@ -34,6 +34,7 @@ export default function Profile({ user, isWorker }) {
                 href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'
             ></link>
             <Header user={user} />
+
             <Button
                 className='btn btn-primary'
                 data-bs-toggle='modal'

@@ -53,7 +53,7 @@ export default function Home({ user }) {
             <main>
                 <div className='icons'>
                     <h1>¿Qué estas buscando?</h1>
-                    <Row xs={2} md={4} className="g-4">{Array.from({ length: 3  }).map((_, idx) => (
+                    <Row xs={2} md={4} className="g-4">{Array.from({ length: 1  }).map((_, idx) => (
                     <Col>
                         {jobsImg.map((value, index) => {
                             return (
@@ -61,7 +61,7 @@ export default function Home({ user }) {
                             <Link href={'/find/' + jobs[index]}>
                                 <div className='icon'>
                                     <Image
-                                        id='albanil'
+                                        id={jobs[index]}
                                         src={value}
                                         width='50px'
                                         height='50px'
