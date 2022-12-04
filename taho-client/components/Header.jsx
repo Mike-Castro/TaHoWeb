@@ -9,6 +9,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { apiServer } from '../config';
 import Modal from 'react-bootstrap/Modal';
+import Box from '@mui/material/Box';
 
 export const getServerSideProps = async (ctx) => {
     const res = await fetch(`${apiServer}/user/auth`, {
@@ -35,10 +36,6 @@ export default function Header({ user, isWorker }) {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
     const seeProfile = () => {
         location.assign('/profile');
     };
@@ -56,8 +53,14 @@ export default function Header({ user, isWorker }) {
         }
         document.cookie = 'authcookie=;expires=' + new Date().toUTCString();
     };
+
     const [show, setShow] = useState(false);
+    const handleClose = () => {
+        setAnchorEl(null)
+        setShow(false);
+    }
     const handleShow = () => setShow(true);
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
 
     return (
         <>
@@ -132,6 +135,25 @@ export default function Header({ user, isWorker }) {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <MenuItem onClick={seeProfile}>Mi cuenta</MenuItem>
+                <Button variant='primary' onClick={handleShow}>Mi Perfil</Button>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>{isWorker ? 'Trabajador' : 'Usuario'}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className='row'>Nombre: {user.firstName}</div> <hr/>
+                        <div className='row'>Apellido: {user.lastName}</div> <hr/>
+                        <div className='row'>Teléfono: {user.phone}</div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Save Changes
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
                 <MenuItem onClick={logout}>Cerrar sesión</MenuItem>
             </Menu>
         </Toolbar>
