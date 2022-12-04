@@ -81,6 +81,7 @@ const WorkerTile = ({
                     alignItems: 'center',
                     height: 180,
                     fontSize: '72px',
+                    borderRadius: '20px',
                 }}
             >
                 <Image

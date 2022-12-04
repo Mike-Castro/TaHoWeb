@@ -54,16 +54,31 @@ export default function Header({ user, isWorker }) {
         document.cookie = 'authcookie=;expires=' + new Date().toUTCString();
     };
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = React.useState(false);
     const handleClose = () => {
-        setAnchorEl(null)
+        setAnchorEl(null);
         setShow(false);
     }
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        setShow(true);
+    };
+    const handleUnshow = () => {
+        setAnchorEl(null);
+        setShow(false);
+    };
     const [isModalOpen, setIsModalOpen] = React.useState(false);
 
     return (
         <>
+        <link
+                href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css'
+                rel='stylesheet'
+            ></link>
+            <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js'></script>
+            <link
+                rel='stylesheet'
+                href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'
+            ></link>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
             <Link href='/home'>
                 <Button>
@@ -81,7 +96,7 @@ export default function Header({ user, isWorker }) {
                 aria-controls={open ? 'basic-menu' : undefined}
                 aria-haspopup='true'
                 aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
+                onClick={seeProfile}
                 sx={{
                     backgroundColor: '#4cd5ff',
                     borderRadius: '20px',
@@ -97,65 +112,6 @@ export default function Header({ user, isWorker }) {
                     {user.username}
                 </Typography>
             </Button>
-            <Menu
-                id='basic-menu'
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                }}
-                PaperProps={{
-                    elevation: 0,
-                    sx: {
-                        overflow: 'visible',
-                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                        mt: 1.5,
-                        '& .MuiAvatar-root': {
-                            width: 32,
-                            height: 32,
-                            ml: -0.5,
-                            mr: 1,
-                        },
-                        '&:before': {
-                            content: '""',
-                            display: 'block',
-                            position: 'absolute',
-                            top: 0,
-                            right: 14,
-                            width: 10,
-                            height: 10,
-                            bgcolor: 'background.paper',
-                            transform: 'translateY(-50%) rotate(45deg)',
-                            zIndex: 0,
-                        },
-                    },
-                }}
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-            >
-                <MenuItem onClick={seeProfile}>Mi cuenta</MenuItem>
-                <Button variant='primary' onClick={handleShow}>Mi Perfil</Button>
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                    <Modal.Title>{isWorker ? 'Trabajador' : 'Usuario'}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className='row'>Nombre: {user.firstName}</div> <hr/>
-                        <div className='row'>Apellido: {user.lastName}</div> <hr/>
-                        <div className='row'>Teléfono: {user.phone}</div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button>
-                    </Modal.Footer>
-                </Modal>
-                <MenuItem onClick={logout}>Cerrar sesión</MenuItem>
-            </Menu>
         </Toolbar>
         </>
     );

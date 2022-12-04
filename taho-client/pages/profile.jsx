@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Button from '@mui/material/Button';
 import { apiServer } from '../config/index.js';
+import Modal from 'react-bootstrap/Modal';
+import Box from '@mui/material/Box';
 
 export const getServerSideProps = async (ctx) => {
     const res = await fetch(`${apiServer}/user/auth`, {
@@ -22,6 +24,26 @@ export const getServerSideProps = async (ctx) => {
 };
 
 export default function Profile({ user, isWorker }) {
+    const [show, setShow] = useState(false);
+    const handleClose = () => {
+        setShow(false);
+    }
+    const handleShow = () => {
+        setShow(true);
+    };
+    const logout = async (e) => {
+        e.preventDefault();
+        try {
+            await fetch(`${apiServer}/user/logout`, {
+                method: 'POST',
+                credentials: 'include',
+            });
+            location.assign('/');
+        } catch (err) {
+            console.log(err);
+        }
+        document.cookie = 'authcookie=;expires=' + new Date().toUTCString();
+    };
     return (
         <>
             <link
@@ -34,65 +56,45 @@ export default function Profile({ user, isWorker }) {
                 href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'
             ></link>
             <Header user={user} />
+            <br></br>
+            <br></br>
+            <br></br>
+            <Box
+                m={1}
+                display="flex"
+                justifyContent="center"
+                alignItems="center">
+                <Button className='btn btn-primary' variant='primary' onClick={handleShow}>Mi Perfil</Button>
+            </Box>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>{isWorker ? 'Trabajador' : 'Usuario'}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className='row'>Nombre: {user.firstName}</div> <hr/>
+                        <div className='row'>Apellido: {user.lastName}</div> <hr/>
+                        <div className='row'>Teléfono: {user.phone}</div><hr/>
+                        {isWorker ? <><div className='row'>Servicios: {user.services}</div><hr/></> : null}
+                        {isWorker ? <div className='row'>Descripción: {user.description}</div> : null}
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Cerrar
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Guardar cambios
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
 
-            <Button
-                className='btn btn-primary'
-                data-bs-toggle='modal'
-                data-bs-target='#myModal'
-            >
-                Mi Perfil
-            </Button>
-
-            <div className='modal fade' id='myModal'>
-                <div className='modal-dialog'>
-                    <div className='modal-content'>
-                        <div className='modal-header'>
-                            <h4 className='modal-title'>
-                                {isWorker ? 'Trabajador' : 'Usuario'}
-                            </h4>
-                            <Button
-                                className='btn-close'
-                                data-bs-dismiss='modal'
-                            ></Button>
-                        </div>
-
-                        <div className='modal-body'>
-                            <div className='row'>
-                                <div className='col-md-4'>Nombre</div>
-                                <div className='col-md-4 ms-auto'>
-                                    {user.firstName}
-                                </div>
-                            </div>
-                            <hr />
-                            <div className='row'>
-                                <div className='col-md-4'>Apellido</div>
-                                <div className='col-md-4 ms-auto'>
-                                    {user.lastName}
-                                </div>
-                            </div>
-                            <hr />
-                            <div className='row'>
-                                <div className='col-md-4'>Telefono</div>
-                                <div className='col-md-4 ms-auto'>
-                                    {user.phone}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='modal-footer'>
-                            <Button
-                                className='btn btn-secondary'
-                                data-bs-dismiss='modal'
-                            >
-                                Cerrar
-                            </Button>
-                            <Button className='btn btn-primary'>
-                                Guardar cambios
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <br></br>
+                <Box
+                    m={1}
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center">
+                    <Button onClick={logout}>Cerrar Sesión</Button>
+                </Box>
             <Footer />
         </>
     );
